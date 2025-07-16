@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div id="stars-container"></div>
+        <h1>Plan Your Dream Trip</h1>
+    </header>
+    <div class="featured-container">
+        <div>
+            <input type="checkbox" id="toggleFeatured" checked>
+            <label for="toggleFeatured">Show Featured Destinations</label>
+        </div>
+        <section id="featuredDestinations">
+            <figure>
+                <img id="featuredImage" src="" alt="">
+                <figcaption id="featuredCaption"></figcaption>
+            </figure>
+        </section>
+    </div>
+    <main>
+        <form id="tripForm">
+            <section class="form-section">
+                <div>
+                    <label for="destinationType">Destination Type:</label>
+                    <select id="destinationType" name="destinationType">
+                        <option value="">Select a type</option>
+                        <option value="Beach">Beach</option>
+                        <option value="City Break">City Break</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Relaxation">Relaxation</option>
+                    </select>
+                    <span class="error-message">*</span>
+                </div>
+                <div id="specificDestinationField">
+                    <label for="specificDestination">Specific Destination:</label>
+                    <input id="specificDestination" type="text" name="specificDestination">
+                    <span class="error-message">*</span>
+                </div>
+                <div>
+                    <label for="tripDuration">Desired Trip Duration (days):</label>
+                    <input type="number" id="tripDuration" name="tripDuration" min="1">
+                    <span class="error-message">*</span>
+                </div>
+                <div>
+                    <label for="totalTravelers">Total Number of Travelers:</label>
+                    <input type="number" id="totalTravelers" name="totalTravelers" min="1">
+                    <span class="error-message">*</span>
+                </div>
+                <div>
+                    <label for="budgetPerPerson">Estimated Budget per Person ($):</label>
+                    <input type="number" id="budgetPerPerson" name="budgetPerPerson" min="0">
+                    <span class="error-message">*</span>
+                </div>
+            </section>
+
+            <section class="button-section">
+                <button type="button" id="planTripButton">Plan Trip</button>
+                <button type="button" id="resetButton">Reset</button>
+            </section>
+        </form>
+
+        <section id="tripSummaryOutput">
+            <h2 id="summaryHeader">Trip Summary</h2>
+            <div id="summaryContent"></div>
+        </section>
+        <small>&copy; "Chigozie / 8972856" 2025</small>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="trip.js"></script>
+</body>
+</html>

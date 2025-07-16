@@ -1,0 +1,280 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #e0f7fa;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #0c1445; /* Nighty blue */
+    color: #ffffff;
+    padding: 15px 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden; /* Keeps stars contained */
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.2em;
+    position: relative; /* To ensure it's above the stars */
+    z-index: 2;
+}
+
+main {
+    max-width: 650px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* Star animation */
+#stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    /* Base animation properties. Duration and delay are set in JS for randomness. */
+    animation-name: move-star;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    opacity: 0; /* Start invisible, animation will fade it in */
+}
+
+@keyframes move-star {
+    from {
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+    50% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        /* End position is controlled by JS via custom properties */
+        transform: translate(var(--end-x, 0px), var(--end-y, 0px));
+    }
+}
+
+h2 {
+    color: #023e7d;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.form-section div {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #023e7d;
+    font-size: 1.05em;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #0096c7; 
+    outline: none;
+    box-shadow: 0 0 6px rgba(0, 150, 199, 0.5);
+}
+
+.error-message {
+    color: #e63946; 
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: block; 
+}
+
+#specificDestinationField {
+    /* Initially hidden, will be shown with JS */
+    display: none;
+}
+
+
+.button-section {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    background-color: #0096c7;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0077b6;
+}
+
+button#resetButton {
+    background-color: #6c757d;
+    border: 1px solid #6c757d;
+}
+
+button#resetButton:hover {
+    background-color: #5a6268;
+}
+
+#tripSummaryOutput {
+    display: none; /* Hide until a trip is planned */
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    text-align: left;
+}
+
+#summaryHeader {
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    user-select: none; /* Prevents text selection on click */
+    padding-right: 30px; /* Space for the icon */
+    margin-bottom: 0; /* Remove bottom margin to keep it tight when collapsed */
+}
+
+/* The +/- indicator icon */
+#summaryHeader::after {
+    content: '+';
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4em;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+#summaryHeader.open::after {
+    content: '−'; /* Using a minus sign for the open state */
+}
+
+#summaryContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+small {
+    display: block;
+    margin-top: 20px;
+    color: #777;
+    text-align: center;
+}
+
+/* --- Featured Destinations Section --- */
+.featured-container {
+    max-width: 650px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.featured-container > div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.featured-container label {
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 0; /* Override default label margin */
+}
+
+input[type="checkbox"] {
+    width: auto; /* Override default width */
+}
+
+#featuredDestinations {
+    margin-top: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    transform-origin: top;
+}
+
+#featuredDestinations.hidden {
+    opacity: 0;
+    max-height: 0 !important; 
+    margin-top: 0;
+    box-shadow: none;
+    transform: scaleY(0);
+}
+
+#featuredDestinations figure {
+    margin: 0;
+    position: relative;
+}
+
+#featuredImage {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background-color: #f0f0f0; /* Placeholder color */
+    transition: opacity 0.5s ease-in-out;
+}
+
+#featuredCaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 30px 15px 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: left;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease-in-out;
+}
